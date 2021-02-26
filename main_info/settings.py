@@ -10,7 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
+from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
+
+load_dotenv(find_dotenv())
+env_get = os.environ.get
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +62,7 @@ ROOT_URLCONF = 'main_info.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'app/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,11 +86,11 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
-        'PORT': 3306,
-        'PASSWORD': '151437',
-        'HOST': 'localhost',
-        'USER': 'ceaqw'
+        'NAME': env_get('DB_NAME'),
+        'PORT': env_get('DB_PORT'),
+        'PASSWORD': env_get('DB_PASS'),
+        'HOST': env_get('DB_HOST'),
+        'USER': env_get('DB_USER')
     }
 }
 
@@ -110,8 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    # 新版drf schema_class默认用的是rest_framework.schemas.openapi.AutoSchema
-
 }
 
 

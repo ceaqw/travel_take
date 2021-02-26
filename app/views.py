@@ -1,24 +1,26 @@
-# from django.shortcuts import render
-# from django.views import View
-from django.shortcuts import HttpResponse
-from django.http import JsonResponse
-from .serializers import UserSerializer
+from django.views.generic import TemplateView
 from rest_framework import generics
-# Create your views here.
+from .serializers import TmpSerializer
 
 
-class TestView(generics.GenericAPIView):
+class IndexView(TemplateView, generics.GenericAPIView):
     """
     get:
-    返回所有图书信息.
-
-    post:
-    新建图书.
+    Response the main page. It's need <b>FLL</b> completed!
+        <b style="color:red;">Action:</b> submit location: ~/app/templates/index.html
     """
-    serializer_class = UserSerializer
+    serializer_class = TmpSerializer
+    template_name = "index.html"
+    # extra_context = {
+    #     'name': 'cc',
+    # }
 
-    def get(self, request, *args, **kwargs):
-        return HttpResponse("This is a test response!")
 
-    def post(self, request,  *args, **kwargs):
-        return JsonResponse({'name': 'test', 'age': 18})
+class MomentsView(TemplateView, generics.GenericAPIView):
+    """
+    get:
+    Response the moment page. It's need <b>FLL</b> completed!
+        <b style="color:red;">Action:</b> submit location: ~/app/templates/moment.html
+    """
+    serializer_class = TmpSerializer
+    template_name = "moment.html"
