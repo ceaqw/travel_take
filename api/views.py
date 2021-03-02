@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 # from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
-from .serializers import CityInfoSerializer
+from rest_framework.generics import ListAPIView
+from .serializers import CityInfoSerializer, MomentInfoSerializer
 # Create your views here.
 
 
@@ -25,6 +26,14 @@ class CityInfo(GenericAPIView):
             'head_img_url': 'http:xxx'
         })
 
-    def post(self, request, *args, **kwargs):
-        return JsonResponse({'status': 'ok'})
 
+class MomentList(ListAPIView):
+    """
+    get:
+    Response is moment_list like:
+        [<br>
+            {moment_id:'xxx', user:'xxx', is_liked:false, liked_num:123, user_head:'http://xxx', content:'xxx', img:'http://xxx'},<br>
+            {moment_id:'xxx', user:'xxx', is_liked:false, liked_num:123, user_head:'http://xxx', content:'xxx', img:'http://xxx'}<br>
+        ]
+    """
+    serializer_class = MomentInfoSerializer

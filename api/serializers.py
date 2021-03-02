@@ -1,3 +1,5 @@
+from abc import ABC
+
 from rest_framework import serializers
 from .models import *
 
@@ -21,3 +23,10 @@ class CityInfoSerializer(serializers.ModelSerializer):
                 "help_text": "Auto-create city main-img href with system, need submit the img file by you!"
             },
         }
+
+
+class MomentInfoSerializer(serializers.ListSerializer, ABC):
+
+    class Meta:
+        model = MomentInfo
+        fields = '__all__'

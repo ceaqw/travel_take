@@ -21,5 +21,5 @@ from .views import IndexView, MomentsView
 urlpatterns = [
     path('api/', include('api.urls')),
     path('index/', IndexView.as_view(), name='index_view'),
-    path('moment/', MomentsView.as_view(), name='moment_view'),
+    path('moment/{}', MomentsView.as_view(), name='moment_view'),
 ]

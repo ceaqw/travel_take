@@ -19,5 +19,6 @@ from .views import *
 
 
 urlpatterns = [
-    path('api/city_info/<int:city_id>', CityInfo.as_view(), name='city_info'),
+    path('city_info/<int:city_id>', CityInfo.as_view(), name='city_info'),
+    path('moment_list/<int:page_size>', MomentList.as_view(), name='moment_list'),
 ]
